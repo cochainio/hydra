@@ -56,6 +56,7 @@ func newTransport(cmd *cobra.Command) *transport {
 		Transport: httpx.NewResilientRoundTripper(
 			&http.Transport{
 				TLSClientConfig: &tls.Config{InsecureSkipVerify: flagx.MustGetBool(cmd, "skip-tls-verify")},
+				Proxy: http.ProxyFromEnvironment,
 			},
 			time.Second,
 			flagx.MustGetDuration(cmd, "fail-after"),
